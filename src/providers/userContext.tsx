@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TLoginFormValues } from "../components/Form/LoginForm/loginFormSchema";
-import { api } from "../services/api";
+/* import { api } from "../services/api"; */
 import { toast } from "react-toastify";
 
 interface IUserContext {
@@ -11,20 +11,20 @@ interface IUserContext {
   ) => Promise<void>;
 }
 
-interface IUser {
+/* interface IUser {
   name: string;
   email: string;
   id: string;
-}
+} */
 
 interface IUserProviderProps {
   children: React.ReactNode;
 }
 
-interface IUserLoginResponse {
+/* interface IUserLoginResponse {
   accessToken: string;
   user: IUser;
-}
+} */
 
 export const UserContext = createContext({} as IUserContext);
 export const UserProvider = ({ children }: IUserProviderProps) => {
@@ -36,9 +36,11 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   ) => {
     try {
       setLoading(true);
-      const { data } = await api.post<IUserLoginResponse>("/login", formData);
+      /* const { data } = await api.post<IUserLoginResponse>("/login", formData);
       localStorage.setItem("@TOKEN_KenzieBurguer", data.accessToken);
-      localStorage.setItem("@USERID_KenzieBurguer", data.user.id);
+      localStorage.setItem("@USERID_KenzieBurguer", data.user.id); */
+      console.log(formData);
+      
       toast.success("Login bem sucedido");
       navigate("/dashboard");
     } catch (error: any) {
