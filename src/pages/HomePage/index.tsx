@@ -34,8 +34,8 @@ export const HomePage = () => {
                     <img src={Enrique} alt="DevEnrique" />
                     <img src={Ricardo} alt="DevRicardo" />
                     <img src={Daniel} alt="DevDaniel" />
-                    <img src={Emanuel} alt="DevEmanuel" />
                     <img src={Germano} alt="DevGermano" />
+                    <img src={Emanuel} alt="DevEmanuel" />
                 </div>
             </StyledDivApresentation>
             <StyledImgDiv>
