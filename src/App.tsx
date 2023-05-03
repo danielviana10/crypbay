@@ -1,8 +1,6 @@
-
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import Router from "./routes";
-
+import Router from "./routes/routes";
 
 function App() {
   return (
