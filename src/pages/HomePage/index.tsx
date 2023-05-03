@@ -33,9 +33,9 @@ export const HomePage = () => {
                 <div>
                     <img src={Enrique} alt="DevEnrique" />
                     <img src={Ricardo} alt="DevRicardo" />
+                    <img src={Daniel} alt="DevDaniel" />
                     <img src={Emanuel} alt="DevEmanuel" />
                     <img src={Germano} alt="DevGermano" />
-                    <img src={Daniel} alt="DevDaniel" />
                 </div>
             </StyledDivApresentation>
             <StyledImgDiv>
