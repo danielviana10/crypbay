@@ -6,18 +6,21 @@ import Emanuel from '/src/assets/emanuel.png'
 import Germano from '/src/assets/germano.jpeg'
 import Daniel from '/src/assets/daniel.jpeg'
 import Crypto from '/src/assets/crypto.jpg'
+import { useNavigate } from 'react-router-dom'
 
 
 export const HomePage = () => {
+    const navigate = useNavigate();
+    
     return (
     <StyledMain>
         <StyledHeader>
             <img src={Logo} alt="CrypBayLogo" />
             <div>
-                <button className='header__btn-login'>
+                <button className='header__btn-login' onClick={() => navigate('/login')}>
                     Login
                 </button>
-                <button className='header__btn-register'>
+                <button className='header__btn-register' onClick={() => navigate('/register')}>
                     Cadastro
                 </button>
             </div>
