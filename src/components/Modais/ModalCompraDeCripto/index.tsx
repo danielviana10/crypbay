@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyledCardModalCompraDeCripto } from "./style"
 import {
     FormControl, FormLabel,
@@ -41,26 +41,29 @@ export const CardModalCompraDeCripto = () => {
     const [inputValue, setInputValue] = useState("");
     const [amountCript, setAmountCript] = useState("");
 
+    const currentCripto = listCriptos.find(cripto => cripto.title === selectValue) as ICripto;
+
     const handleSelectChange = (
         event: React.ChangeEvent<HTMLSelectElement>
     ) => {
-        setSelectValue(event.target.value);
+        const value = event.target.value;
+        setSelectValue(value);
+
         setInputValue('');
         setAmountCript('');
     };
-    
-    const currentCripto = listCriptos.find(cripto => cripto.title === selectValue) as ICripto;
+
     const handleInputValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
+        const formulaInputValue = +value / currentCripto?.price;
         setInputValue(value);
-        const formula = +value/currentCripto?.price;
-        setAmountCript(String(formula));
+        setAmountCript(String(formulaInputValue));
     };
 
     const handleInputAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setAmountCript(value);
-        const formula = +value*currentCripto?.price;
+        const formula = +value * currentCripto?.price;
         setInputValue(String(formula));
     };
 
@@ -71,9 +74,10 @@ export const CardModalCompraDeCripto = () => {
     return (
         <StyledCardModalCompraDeCripto className={loading ? "show" : "hidden"}>
             <div className="dialog" role="dialog">
-                <div>
+                <div className="modalContainer">
+                    <h1>Crybay compra</h1>
                     <form onSubmit={handleSubmit}>
-                        <VStack spacing={4} align="stretch">
+                        <VStack spacing={1} align="stretch">
                             <FormLabel>Quatidade de criptos</FormLabel>
                             <Input className="input"
                                 type="number"
