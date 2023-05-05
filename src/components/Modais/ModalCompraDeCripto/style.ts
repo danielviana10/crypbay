@@ -19,26 +19,59 @@ export const StyledCardModalCompraDeCripto = styled.div`
   display: none;
 }
 .dialog{
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+ 
     width: 100%;
-    max-width: 500px;
+    max-width: 300px;
     background-color: white;
-    margin-top: 5rem;
-    background-color: #FFFFFFFF;
-    color: black;
-}
-form{
-  margin: 1rem;
-}
-.input{
+    background-color: #373B59;
+    color: #FFFFFFFF;
+    
+.modalContainer{
+  h1{
+      font-size: 20px;
+      margin: 3rem 0rem 3rem;
+    }
+    margin: 1.4rem;
+  form{
+  /* display: flex; */
+  /* margin: 1rem; */
+  width: 100%;
+  label{
+    margin-top: 1rem;
+  }
+  .input{
   border: 1px solid black;
   padding: 1rem;
   width: auto;
   box-sizing: border-box;
+  background-color: #FFFFFFFF;
+  color: #000000;
+  
 };
 .formSelect{
   width: auto;
   select{
-    border: 1px solid black;
+    border: 1px solid #FFFFFFFF;
+    
+    color: #FFFFFFFF;
+    
+      appearance: inherit;
+    
+    option{
+      background-color: #FFFFFFFF;
+      color: #000000;
+    }
   }
+}
+  button{
+    background-color: #FFDB15;
+    color: #000000;
+    margin: 1.4rem 0rem;
+  }
+}
+}
 }
 `;
