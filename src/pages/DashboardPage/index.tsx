@@ -9,6 +9,7 @@ import Bitcoin from '/src/assets/currency-bitcoin.svg'
 import Exchange from '/src/assets/currency-exchange.svg'
 import Coin from '/src/assets/coin.svg'
 import Cash from '/src/assets/cash-coin.svg'
+import { CardModalVendaDeCripto } from "../../components/Modais/ModalVendaDeCripto"
 
 interface ICrypto{
     id: number;
@@ -59,7 +60,8 @@ export const DashboardPage = () => {
     
     return (
         <>
-            {currOpen ? <CardModalCompraDeCripto /> : null}
+        {currOpen ? <CardModalCompraDeCripto /> : null}
+        {currOpen ? <CardModalVendaDeCripto /> : null } 
             <StyledMain>
                 <StyledHeader>
                     <img src={Logo} alt="CrypBayLogo" className="logo"/>
@@ -129,6 +131,9 @@ export const DashboardPage = () => {
                     </StyledDashDiv>
                 </StyledWrapper>
             </StyledMain>
+            <h2>dashboard</h2>
+            <CardModalCompraDeCripto />
+            <CardModalVendaDeCripto />
         </>
     )
 }

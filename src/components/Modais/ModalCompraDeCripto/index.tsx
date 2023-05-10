@@ -36,7 +36,7 @@ const listCriptos: ICripto[] = [
 ]
 
 export const CardModalCompraDeCripto = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [selectValue, setSelectValue] = useState(listCriptos[0].title);
     const [inputValue, setInputValue] = useState("");
     const [amountCript, setAmountCript] = useState("");
