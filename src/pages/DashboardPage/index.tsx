@@ -133,7 +133,7 @@ export const DashboardPage = () => {
             </StyledMain>
             <h2>dashboard</h2>
             <CardModalCompraDeCripto />
-            <CardModalVendaDeCripto />
+            {/* <CardModalVendaDeCripto /> */}
         </>
     )
 }

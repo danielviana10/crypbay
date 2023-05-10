@@ -1,48 +1,24 @@
-import { useState, useEffect } from "react";
-import { StyledCardModalCompraDeCripto } from "./style"
+import { useState, useContext } from "react";
+import { StyledCardModalVendaDeCripto } from "./style";
 import {
-    FormControl, FormLabel,
-    Input, Select, VStack, Button
-} from '@chakra-ui/react';
-import { string } from "zod";
-
-
-interface ILoading {
-    loading: string,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-}
-interface ICripto {
-    id: number,
-    title: string,
-    price: number
-}
-
-const listCriptos: ICripto[] = [
-    {
-        id: 1,
-        title: "bitcoin",
-        price: 10
-    },
-    {
-        id: 2,
-        title: "Ethereum",
-        price: 5
-    },
-    {
-        id: 3,
-        title: "Litecoin",
-        price: 2
-    }
-]
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  VStack,
+  Button,
+} from "@chakra-ui/react";
+import { UserContext } from "../../../providers/userContext";
 
 export const CardModalVendaDeCripto = () => {
-    const [loading, setLoading] = useState(true);
-    const [selectValue, setSelectValue] = useState(listCriptos[0].title);
-    const [inputValue, setInputValue] = useState("");
-    const [amountCript, setAmountCript] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [amountCript, setAmountCript] = useState("");
+  const { listCriptos, loadingModal, setLoadingModal } = useContext(UserContext);
+  const [selectValue, setSelectValue] = useState('bitcoin');
 
-    const currentCripto = listCriptos.find(cripto => cripto.title === selectValue) as ICripto;
-
+  const currentCripto = listCriptos.find(
+    (cripto) => cripto.name === selectValue
+  );
     const handleSelectChange = (
         event: React.ChangeEvent<HTMLSelectElement>
     ) => {
@@ -55,16 +31,20 @@ export const CardModalVendaDeCripto = () => {
 
     const handleInputValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
-        const formulaInputValue = +value / currentCripto?.price;
+        if(currentCripto){
+            const formulaInputValue = +value / currentCripto?.price;
+            setAmountCript(String(formulaInputValue));
+        }
         setInputValue(value);
-        setAmountCript(String(formulaInputValue));
     };
 
     const handleInputAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setAmountCript(value);
-        const formula = +value * currentCripto?.price;
-        setInputValue(String(formula));
+        if(currentCripto){
+            const formula = +value * currentCripto?.price;
+            setInputValue(String(formula));
+        }
     };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -72,10 +52,11 @@ export const CardModalVendaDeCripto = () => {
         console.log(selectValue);
     };
     return (
-        <StyledCardModalCompraDeCripto className={loading ? "show" : "hidden"}>
-            <div className="dialog" role="dialog">
-                <div className="modalContainer">
-                    <h1>Crybay venda</h1>
+        <StyledCardModalVendaDeCripto >
+      <div role="dialog" className={loadingModal ? "dialog" : "hidden"}>
+        <div className="modalContainer">
+            <Button onClick={() => setLoadingModal(false)} className="fecharModal" type="button">X</Button>
+            <h1>Crybay venda</h1>
                     <form onSubmit={handleSubmit}>
                         <VStack spacing={1} align="stretch">
                             <FormLabel>Quatidade de criptos</FormLabel>
@@ -94,8 +75,8 @@ export const CardModalVendaDeCripto = () => {
                                 <FormLabel>Selecione a moeda</FormLabel>
                                 <Select onChange={handleSelectChange}>
                                     {listCriptos.map((cripto) => (
-                                        <option value={cripto.title} key={cripto.id}>
-                                            {cripto.title}
+                                        <option value={cripto.name} key={cripto.id}>
+                                            {cripto.name}
                                         </option>
                                     ))}
                                 </Select>
@@ -103,8 +84,8 @@ export const CardModalVendaDeCripto = () => {
                             <Button type="submit">Vender</Button>
                         </VStack>
                     </form>
-                </div>
-            </div>
-        </StyledCardModalCompraDeCripto>
+        </div>
+      </div>
+    </StyledCardModalVendaDeCripto>
     );
 };
