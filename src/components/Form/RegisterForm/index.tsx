@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TRegisterFormValues, registerFormSchema } from "./registerFormSchema";
 import Input from "../../Input";
 import { UserContext } from "../../../providers/userContext";
+import { StyledForm } from "./style";
 
 export const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,9 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(submit)}>
+    <>
+    <StyledForm onSubmit={handleSubmit(submit)}>
+      <h1>Cadastre-se</h1>
       <Input
         type="text"
         label="Seu nome"
@@ -55,7 +58,8 @@ export const RegisterForm = () => {
         disabled={loading}
         error={errors.avatar}
       />
-      <button>Entrar</button>
-    </form>
+      <button>Cadastrar</button>
+    </StyledForm>
+    </>
   );
 };

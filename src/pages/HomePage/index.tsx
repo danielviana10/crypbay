@@ -9,7 +9,9 @@ import Crypto from '/src/assets/crypto.jpg'
 import { Link } from 'react-router-dom'
 
 
+
 export const HomePage = () => {
+    
     return (
     <StyledMain>
         <StyledHeader>
