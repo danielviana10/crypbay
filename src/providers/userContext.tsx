@@ -15,6 +15,17 @@ interface IUserContext {
     formData: TRegisterFormValues,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
+  listCriptos:ICripto[];
+  loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
+  loadingModal: boolean;
+  setLoadingModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export interface ICripto {
+  id: number;
+  name: string;
+  price: number;
 }
 
 interface IUserProviderProps {
@@ -73,6 +84,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [listCriptos, setListCriptos] = useState<IListCriptos[]>([]);
   const [walletCurrentUser, setWalletCurrentUser] = useState<Iwallet[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingModal, setLoadingModal] = useState(true);
   const [user, setUser] = useState<IUser>();
  
 
@@ -166,7 +178,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   };
 
   return (
-    <UserContext.Provider value={{ userLogin, userRegister }}>
+    <UserContext.Provider value={{ userLogin, userRegister, listCriptos, loading, setLoading, loadingModal, setLoadingModal }}>
       {children}
     </UserContext.Provider>
   );

@@ -6,6 +6,7 @@ import Emanuel from '/src/assets/emanuel.png'
 import Germano from '/src/assets/germano.jpeg'
 import Daniel from '/src/assets/daniel.jpeg'
 import Crypto from '/src/assets/crypto.jpg'
+import { Link } from 'react-router-dom'
 
 
 export const HomePage = () => {
@@ -14,12 +15,16 @@ export const HomePage = () => {
         <StyledHeader>
             <img src={Logo} alt="CrypBayLogo" />
             <div>
+                <Link to={'/login'}>
                 <button className='header__btn-login'>
                     Login
                 </button>
+                </Link>
+                <Link to={'/register'}>
                 <button className='header__btn-register'>
                     Cadastro
                 </button>
+                </Link>
             </div>
         </StyledHeader>
         <StyledWrapper>
