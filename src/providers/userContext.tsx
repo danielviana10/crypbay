@@ -23,7 +23,8 @@ interface IUserContext {
   loadingModalVenda: boolean;
   setLoadingModalVenda: React.Dispatch<React.SetStateAction<boolean>>;
   currentCripto: string;
-  setCurrentCripto: React.Dispatch<React.SetStateAction<string>>
+  setCurrentCripto: React.Dispatch<React.SetStateAction<string>>;
+  user: IUser | undefined;
 }
 
 export interface ICripto {
@@ -174,6 +175,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setLoadingModalVenda,
         currentCripto,
         setCurrentCripto,
+        user
       }}
     >
       {children}
