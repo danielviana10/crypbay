@@ -10,6 +10,7 @@ import {
   StyledWrapper,
   StyledDivAside,
   StyledDashDiv,
+  StyledDiv,
 } from "./style";
 import Wallet from "/src/assets/wallet.svg";
 import List from "/src/assets/list-columns.svg";
@@ -21,6 +22,8 @@ import { ModalVendaDeCripto } from "../../components/Modais/ModalVendaDeCripto";
 import { UserContext } from "../../providers/userContext";
 import { ModalAdicionarSaldoCripto } from "../../components/Modais/ModalAdicionarSaldoCripto";
 import { ModalSacarSaldo } from "../../components/Modais/ModalSacarSaldo";
+import UserWallet from "../HomePage/Wallet";
+import UserHistory from "./History";
 
 interface ICrypto {
   id: number;
@@ -43,9 +46,16 @@ export const DashboardPage = () => {
   } = useContext(UserContext);
 
   const handleCriptoAndModal = (cripto: string) => {
+<<<<<<< HEAD
     setCurrentCripto(cripto);
     setLoadingModalCompra(true);
   };
+=======
+      setCurrentCripto(cripto)
+      setLoadingModalCompra(true)
+  }
+  const [walletOpen, setWalletOpen] = useState(true);
+>>>>>>> c05074ea8c925af04856e375689a6a6b58c2a463
 
   return (
     <>
@@ -71,11 +81,11 @@ export const DashboardPage = () => {
               <h2>Investimento Total</h2>
               <span>R$ 5400,00</span>
             </StyledTotalDiv>
-            <StyledDivAside>
+            <StyledDivAside onClick={() => setWalletOpen(true)}>
               <img src={Wallet} alt="Wallet" />
               <button>Carteira</button>
             </StyledDivAside>
-            <StyledDivAside>
+            <StyledDivAside onClick={() => setWalletOpen(false)}>
               <img src={List} alt="History" />
               <button>Histórico</button>
             </StyledDivAside>
@@ -104,6 +114,7 @@ export const DashboardPage = () => {
               </button>
             </StyledDivAside>
           </StyledAside>
+          <StyledDiv>
           <StyledDashDiv>
             <div>
               <ul>
@@ -120,10 +131,9 @@ export const DashboardPage = () => {
                 ))}
               </ul>
             </div>
-            <div>
-              <ul></ul>
-            </div>
           </StyledDashDiv>
+          {walletOpen ? <UserWallet/> : <UserHistory/>}
+          </StyledDiv>
         </StyledWrapper>
       </StyledMain>
       {/* <h2>dashboard</h2> */}
