@@ -131,9 +131,9 @@ export const StyledDashDiv = styled.div`
         flex-direction: row;
         gap: 20px;
         padding-top: 30px;
-        width: 80%;
-        flex-wrap: nowrap;
-        padding-left: 200px;
+        width: 100%;
+        flex-wrap: wrap;
+
 
         li{
             display: flex;
@@ -164,4 +164,11 @@ export const StyledDashDiv = styled.div`
             }
         }
     }
+`
+
+export const StyledDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
 `
