@@ -43,6 +43,7 @@ export const DashboardPage = () => {
     setLoadingModalSacar,
     loadingModalAdicionarSaldo,
     setLoadingModalAdicionarSaldo,
+    userLogout
   } = useContext(UserContext);
 
   const handleCriptoAndModal = (cripto: string) => {
@@ -67,7 +68,7 @@ export const DashboardPage = () => {
               <span>Emanuel Spitzner</span>
               <button>Editar</button>
             </div>
-            <button>Sair</button>
+            <button onClick={() => userLogout()}>Sair</button>
           </div>
         </StyledHeader>
         <StyledWrapper>

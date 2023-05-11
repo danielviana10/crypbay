@@ -23,12 +23,13 @@ interface IUserContext {
   loadingModalVenda: boolean;
   setLoadingModalVenda: React.Dispatch<React.SetStateAction<boolean>>;
   currentCripto: string;
-  setCurrentCripto: React.Dispatch<React.SetStateAction<string>>
+  setCurrentCripto: React.Dispatch<React.SetStateAction<string>>;
   loadingModalAdicionarSaldo: boolean;
-  setLoadingModalAdicionarSaldo: React.Dispatch<React.SetStateAction<boolean>>
+  setLoadingModalAdicionarSaldo: React.Dispatch<React.SetStateAction<boolean>>;
   loadingModalSacar: boolean;
   setLoadingModalSacar: React.Dispatch<React.SetStateAction<boolean>>;
-  user: IUser | undefined;
+  user: IUser | null;
+  userLogout: () => void;
 }
 
 export interface ICripto {
@@ -90,7 +91,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   const [loadingModalVenda, setLoadingModalVenda] = useState(false);
   const [loadingModalSacar, setLoadingModalSacar] = useState(false);
   const [loadingModalAdicionarSaldo, setLoadingModalAdicionarSaldo] = useState(false);
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
     const getAllListCriptos = async () => {
@@ -105,6 +106,13 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     };
     getAllListCriptos();
   }, []);
+
+  const userLogout = () => {
+    localStorage.removeItem("@TOKEN");
+    localStorage.removeItem("@USERID");
+    setUser(null);
+    navigate("/");
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("@TOKEN");
@@ -185,7 +193,8 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setLoadingModalAdicionarSaldo,
         loadingModalSacar, 
         setLoadingModalSacar,
-        user
+        user,
+        userLogout
       }}
     >
       {children}
