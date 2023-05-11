@@ -20,7 +20,7 @@ export const StyledForm = styled.form`
     }
 
     input{
-        width: 290px;
+        width: 270px;
         height: 30px;
         border-radius: 10px;
         padding-left: 10px;
@@ -37,7 +37,8 @@ export const StyledForm = styled.form`
     }
 
     button{
-        width: 305px;
+        width: 270px;
+        height: 40px;
         font-family: 'Inter', sans-serif;
         font-style: normal;
         font-weight: 400;
