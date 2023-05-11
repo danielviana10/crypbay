@@ -25,11 +25,6 @@ import { ModalSacarSaldo } from "../../components/Modais/ModalSacarSaldo";
 import UserWallet from "../HomePage/Wallet";
 import UserHistory from "./History";
 
-interface ICrypto {
-  id: number;
-  name: string;
-  price: number;
-}
 
 export const DashboardPage = () => {
   const {
