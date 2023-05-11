@@ -13,7 +13,7 @@ import { UserContext } from "../../../providers/userContext";
 export const CardModalVendaDeCripto = () => {
   const [inputValue, setInputValue] = useState("");
   const [amountCript, setAmountCript] = useState("");
-  const { listCriptos, loadingModal, setLoadingModal } = useContext(UserContext);
+  const { listCriptos, loadingModalVenda, setLoadingModalVenda } = useContext(UserContext);
   const [selectValue, setSelectValue] = useState('bitcoin');
 
   const currentCripto = listCriptos.find(
@@ -53,9 +53,9 @@ export const CardModalVendaDeCripto = () => {
     };
     return (
         <StyledCardModalVendaDeCripto >
-      <div role="dialog" className={loadingModal ? "dialog" : "hidden"}>
+      <div role="dialog" className={loadingModalVenda ? "dialog" : "hidden"}>
         <div className="modalContainer">
-            <Button onClick={() => setLoadingModal(false)} className="fecharModal" type="button">X</Button>
+            <Button onClick={() => setLoadingModalVenda(false)} className="fecharModal" type="button">X</Button>
             <h1>Crybay venda</h1>
                     <form onSubmit={handleSubmit}>
                         <VStack spacing={1} align="stretch">
