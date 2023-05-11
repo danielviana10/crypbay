@@ -1,10 +1,8 @@
 import { useState, useContext } from "react";
 import { StyledCardModalSacarCripto } from "./style";
 import {
-  FormControl,
   FormLabel,
   Input,
-  Select,
   VStack,
   Button,
 } from "@chakra-ui/react";

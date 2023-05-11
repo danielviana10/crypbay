@@ -1,4 +1,3 @@
-import React from 'react'
 import { StyledHistoryWrapper } from './style'
 
 const UserHistory = () => {

@@ -1,10 +1,6 @@
-import React, { useContext } from 'react'
 import { StyledWalletWrapper } from './style'
-import { UserContext } from '../../../providers/userContext'
 
 const UserWallet = () => {
-  
-    const { user } = useContext (UserContext);
 
     return (
     <StyledWalletWrapper>

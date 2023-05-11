@@ -4,7 +4,6 @@ import { TLoginFormValues } from "../components/Form/LoginForm/loginFormSchema";
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 import { TRegisterFormValues } from "../components/Form/RegisterForm/registerFormSchema";
-import { string } from "zod";
 
 interface IUserContext {
   userLogin: (
@@ -42,12 +41,12 @@ interface IUserProviderProps {
   children: React.ReactNode;
 }
 
-interface Itransacoes {
+/*interface Itransacoes {
   id: number;
   tipo: string;
   valor: number;
   nameMoeda: string;
-}
+}*/
 
 export interface IUser {
   email: string;
@@ -137,7 +136,7 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     if (token && userId) {
       userAutoLogin();
     }
-  }, []);
+  }, [navigate]);
 
   const userLogin = async (
     formData: TLoginFormValues,
@@ -166,8 +165,9 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
   ) => {
     try {
       setLoading(true);
-      /* const {data} = await api.post<TRegisterFormValues>("/register", formData); */
-      console.log(formData);
+      const response = await api.post<TRegisterFormValues>("/register", formData);
+      console.log(response)
+      navigate('/login');
       toast.success("Usuário cadastrado!");
     } catch (error) {
       toast.error("Erro ao tentar cadastrar um usuário.");
