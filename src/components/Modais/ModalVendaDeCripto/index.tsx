@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { UserContext } from "../../../providers/userContext";
 
-export const CardModalVendaDeCripto = () => {
+export const ModalVendaDeCripto = () => {
   const [inputValue, setInputValue] = useState("");
   const [amountCript, setAmountCript] = useState("");
   const { listCriptos, loadingModalVenda, setLoadingModalVenda } = useContext(UserContext);

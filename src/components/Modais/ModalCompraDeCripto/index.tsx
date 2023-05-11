@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { UserContext } from "../../../providers/userContext";
 
-export const CardModalCompraDeCripto = () => {
+export const ModalCompraDeCripto = () => {
   const [inputValue, setInputValue] = useState("");
   const [amountCript, setAmountCript] = useState("");
   const { listCriptos,  loadingModalCompra, setLoadingModalCompra, currentCripto} = useContext(UserContext);
@@ -24,8 +24,8 @@ export const CardModalCompraDeCripto = () => {
     const value = event.target.value;
     setSelectValue(value);
 
-    setInputValue("");
-    setAmountCript("");
+    setInputValue('');
+    setAmountCript('');
   };
 
   const handleInputValueChange = (
