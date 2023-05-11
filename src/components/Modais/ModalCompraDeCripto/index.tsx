@@ -13,10 +13,10 @@ import { UserContext } from "../../../providers/userContext";
 export const CardModalCompraDeCripto = () => {
   const [inputValue, setInputValue] = useState("");
   const [amountCript, setAmountCript] = useState("");
-  const { listCriptos, loadingModal, setLoadingModal } = useContext(UserContext);
-  const [selectValue, setSelectValue] = useState('bitcoin');
+  const { listCriptos,  loadingModalCompra, setLoadingModalCompra, currentCripto} = useContext(UserContext);
+  const [selectValue, setSelectValue] = useState(currentCripto);
 
-  const currentCripto = listCriptos.find(
+  const selectCripto = listCriptos.find(
     (cripto) => cripto.name === selectValue
   );
 
@@ -32,8 +32,8 @@ export const CardModalCompraDeCripto = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = event.target.value;
-    if (currentCripto) {
-      const formulaInputValue = +value / currentCripto?.price;
+    if (selectCripto) {
+      const formulaInputValue = +value / selectCripto?.price;
       setAmountCript(String(formulaInputValue));
     }
     setInputValue(value);
@@ -44,8 +44,8 @@ export const CardModalCompraDeCripto = () => {
   ) => {
     const value = event.target.value;
     setAmountCript(value);
-    if (currentCripto) {
-      const formula = +value * currentCripto?.price;
+    if (selectCripto) {
+      const formula = +value * selectCripto?.price;
       setInputValue(String(formula));
     }
   };
@@ -56,9 +56,9 @@ export const CardModalCompraDeCripto = () => {
   };
   return (
     <StyledCardModalCompraDeCripto >
-      <div role="dialog" className={loadingModal ? "dialog" : "hidden"}>
+      <div role="dialog" className={loadingModalCompra ? "dialog" : "hidden"}>
         <div className="modalContainer">
-            <Button onClick={() => setLoadingModal(false)} className="fecharModal" type="button">X</Button>
+            <Button onClick={() => setLoadingModalCompra(false)} className="fecharModal" type="button">X</Button>
           <h1>Crybay compra</h1>
           <form onSubmit={handleSubmit}>
             <VStack spacing={1} align="stretch">
@@ -79,6 +79,7 @@ export const CardModalCompraDeCripto = () => {
               <FormControl className="formSelect">
                 <FormLabel>Selecione a moeda</FormLabel>
                 <Select onChange={handleSelectChange}>
+                    <option>{currentCripto}</option>
                   {listCriptos.map((cripto) => (
                     <option value={cripto.name} key={cripto.id}>
                       {cripto.name}

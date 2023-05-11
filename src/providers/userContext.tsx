@@ -1,10 +1,10 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TLoginFormValues } from "../components/Form/LoginForm/loginFormSchema";
-import { api } from "../services/api"; 
+import { api } from "../services/api";
 import { toast } from "react-toastify";
 import { TRegisterFormValues } from "../components/Form/RegisterForm/registerFormSchema";
-
+import { string } from "zod";
 
 interface IUserContext {
   userLogin: (
@@ -15,11 +15,15 @@ interface IUserContext {
     formData: TRegisterFormValues,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
-  listCriptos:ICripto[];
+  listCriptos: ICripto[];
   loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  loadingModal: boolean;
-  setLoadingModal: React.Dispatch<React.SetStateAction<boolean>>
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  loadingModalCompra: boolean;
+  setLoadingModalCompra: React.Dispatch<React.SetStateAction<boolean>>;
+  loadingModalVenda: boolean;
+  setLoadingModalVenda: React.Dispatch<React.SetStateAction<boolean>>;
+  currentCripto: string;
+  setCurrentCripto: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface ICripto {
@@ -37,13 +41,6 @@ interface Itransacoes {
   tipo: string;
   valor: number;
   nameMoeda: string;
-}
-
-interface Iwallet {
-  id: number;
-		userId: number;
-		saldo: number;
-		transacoes: Itransacoes[];
 }
 
 export interface IUser {
@@ -82,38 +79,24 @@ export const UserContext = createContext({} as IUserContext);
 export const UserProvider = ({ children }: IUserProviderProps) => {
   const navigate = useNavigate();
   const [listCriptos, setListCriptos] = useState<IListCriptos[]>([]);
-  const [walletCurrentUser, setWalletCurrentUser] = useState<Iwallet[]>([]);
+  const [currentCripto, setCurrentCripto] = useState("bitcoin");
   const [loading, setLoading] = useState(false);
-  const [loadingModal, setLoadingModal] = useState(true);
+  const [loadingModalCompra, setLoadingModalCompra] = useState(false);
+  const [loadingModalVenda, setLoadingModalVenda] = useState(false);
   const [user, setUser] = useState<IUser>();
- 
 
   useEffect(() => {
     const getAllListCriptos = async () => {
       try {
         const { data } = await api.get<IListCriptos[]>("/listCriptos");
         setListCriptos(data);
-        console.log(data)
+        console.log(data);
       } catch (error) {
         const Ierror = error as IAxiosError;
         console.log(Ierror);
       }
     };
-    getAllListCriptos()
-  }, []);
-
-  useEffect(() => {
-    const getWalletCurrentUser = async () => {
-      try {
-        const { data } = await api.get<Iwallet[]>("/wallets");
-        setWalletCurrentUser(data);
-        console.log(data)
-      } catch (error) {
-        const Ierror = error as IAxiosError;
-        console.log(Ierror);
-      }
-    };
-    getWalletCurrentUser()
+    getAllListCriptos();
   }, []);
 
   useEffect(() => {
@@ -149,14 +132,14 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
       setLoading(true);
       const { data } = await api.post<IUserLoginResponse>("/login", formData);
       localStorage.setItem("@TOKEN", data.accessToken);
-      localStorage.setItem("@USERID", JSON.stringify(data.user.id)); 
-      setUser(data.user)
+      localStorage.setItem("@USERID", JSON.stringify(data.user.id));
+      setUser(data.user);
 
       toast.success("Login bem sucedido");
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-      toast.error("Email e/ou senha incorreto.")
+      toast.error("Email e/ou senha incorreto.");
     } finally {
       setLoading(false);
     }
@@ -167,18 +150,32 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     try {
-        setLoading(true)
-        /* const {data} = await api.post<TRegisterFormValues>("/register", formData); */
-        console.log(formData);
-        toast.success("Usuário cadastrado!")
+      setLoading(true);
+      /* const {data} = await api.post<TRegisterFormValues>("/register", formData); */
+      console.log(formData);
+      toast.success("Usuário cadastrado!");
     } catch (error) {
-        toast.error("Erro ao tentar cadastrar um usuário.")
-        console.log(error)
+      toast.error("Erro ao tentar cadastrar um usuário.");
+      console.log(error);
     }
   };
 
   return (
-    <UserContext.Provider value={{ userLogin, userRegister, listCriptos, loading, setLoading, loadingModal, setLoadingModal }}>
+    <UserContext.Provider
+      value={{
+        userLogin,
+        userRegister,
+        listCriptos,
+        loading,
+        setLoading,
+        loadingModalCompra,
+        setLoadingModalCompra,
+        loadingModalVenda,
+        setLoadingModalVenda,
+        currentCripto,
+        setCurrentCripto,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
