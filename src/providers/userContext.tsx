@@ -23,16 +23,12 @@ interface IUserContext {
   loadingModalVenda: boolean;
   setLoadingModalVenda: React.Dispatch<React.SetStateAction<boolean>>;
   currentCripto: string;
-<<<<<<< HEAD
   setCurrentCripto: React.Dispatch<React.SetStateAction<string>>
   loadingModalAdicionarSaldo: boolean;
   setLoadingModalAdicionarSaldo: React.Dispatch<React.SetStateAction<boolean>>
   loadingModalSacar: boolean;
   setLoadingModalSacar: React.Dispatch<React.SetStateAction<boolean>>;
-=======
-  setCurrentCripto: React.Dispatch<React.SetStateAction<string>>;
   user: IUser | undefined;
->>>>>>> c05074ea8c925af04856e375689a6a6b58c2a463
 }
 
 export interface ICripto {
@@ -185,14 +181,11 @@ export const UserProvider = ({ children }: IUserProviderProps) => {
         setLoadingModalVenda,
         currentCripto,
         setCurrentCripto,
-<<<<<<< HEAD
         loadingModalAdicionarSaldo, 
         setLoadingModalAdicionarSaldo,
         loadingModalSacar, 
-        setLoadingModalSacar
-=======
+        setLoadingModalSacar,
         user
->>>>>>> c05074ea8c925af04856e375689a6a6b58c2a463
       }}
     >
       {children}
