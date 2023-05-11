@@ -46,16 +46,11 @@ export const DashboardPage = () => {
   } = useContext(UserContext);
 
   const handleCriptoAndModal = (cripto: string) => {
-<<<<<<< HEAD
     setCurrentCripto(cripto);
     setLoadingModalCompra(true);
   };
-=======
-      setCurrentCripto(cripto)
-      setLoadingModalCompra(true)
-  }
+  
   const [walletOpen, setWalletOpen] = useState(true);
->>>>>>> c05074ea8c925af04856e375689a6a6b58c2a463
 
   return (
     <>
